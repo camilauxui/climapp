@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import WeatherForm from './components/WeatherForm';
+import WeatherInfo from './components/WeatherInfo';
+import ErrorAlert from './components/ErrorAlert';
+import useWeatherApi from './hooks/useWeatherApi';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [query, setQuery] = useState('');
+  const { weatherData, error, fetchWeather } = useWeatherApi();
+
+  const handleSearch = () => {
+    if (query.trim()) {
+      fetchWeather(query);
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="container py-5">
+      <h1 className="text-center mb-4">Weather App</h1>
+      <WeatherForm query={query} setQuery={setQuery} onSearch={handleSearch} />
+      {error && <ErrorAlert message={error} />}
+      {weatherData && <WeatherInfo data={weatherData} />}
+    </div>
+  );
+};
 
-export default App
+export default App;
