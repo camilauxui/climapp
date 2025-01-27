@@ -1,12 +1,14 @@
-### **README para la App del Clima**
-
 # WeatherApp
 
 ![Adalid Logo](src/assets/logo.jpeg)
 
-**WeatherApp** es una aplicación React diseñada para consumir datos de una API de clima en tiempo real. Permite a los usuarios buscar el clima actual de cualquier ciudad y muestra información detallada como temperatura, humedad, velocidad del viento, y más.
+**WeatherApp** es una aplicación React diseñada para consumir datos de una API de clima en tiempo real. Los estudiantes deberán identificar y corregir errores, implementar características pendientes y mejorar la funcionalidad para que la app sea completamente funcional.
 
-## **Características Principales**
+## Objetivo
+
+El objetivo de este proyecto es aprender a consumir APIs, manejar estado y efectos en React, optimizar el rendimiento, gestionar errores y aplicar buenas prácticas en el desarrollo de aplicaciones Cliente/Servidor.
+
+## Características Principales
 
 1. **Búsqueda de Clima por Ciudad**:
 
@@ -22,37 +24,33 @@
 2. **Consumo de API en React**:
 
    - Uso de la API de [OpenWeatherMap](https://openweathermap.org/) para obtener datos del clima.
-   - Implementación con `Fetch API` y `Axios`.
+   - Implementación utilizando `Fetch API`.
 
-3. **Gestión de Errores**:
+3. **Errores y Tareas Pendientes**:
 
-   - Manejo de errores cuando:
-     - El usuario ingresa una ciudad inválida.
-     - Hay problemas de red o de conexión con la API.
-   - Mensajes de error claros y amigables.
+   - El proyecto incluye errores intencionales y funcionalidades incompletas para retar a los estudiantes:
+     - Errores en rutas e importaciones.
+     - Validaciones faltantes en los inputs.
+     - Estado de carga (`loading`) no implementado.
+     - Manejo básico y simplista de errores en la API.
 
 4. **Diseño Responsivo**:
+   - Uso de **Bootstrap** para una experiencia de usuario adaptativa.
 
-   - Interfaz moderna y adaptativa con **Bootstrap** para una experiencia fluida en cualquier dispositivo.
-
-5. **Optimización del Código**:
-   - Uso de hooks como `useState` y `useEffect` para la gestión del estado y efectos secundarios.
-   - Creación de hooks personalizados para separar la lógica de negocio de la UI.
-
-## **Estructura del Proyecto**
+## Estructura del Proyecto
 
 ```plaintext
 WeatherApp/
 ├── public/                     # Archivos públicos
 ├── src/                        # Código fuente
 │   ├── components/             # Componentes reutilizables
-│   │   ├── WeatherForm.jsx     # Formulario para buscar el clima
-│   │   ├── WeatherInfo.jsx     # Mostrar la información del clima
-│   │   ├── ErrorAlert.jsx      # Componente para mostrar errores
+│   │   ├── FormWeather.jsx     # Formulario para buscar el clima (nombre erróneo)
+│   │   ├── InfoWeather.jsx     # Mostrar la información del clima (nombre erróneo)
+│   │   ├── Error.jsx           # Componente para mostrar errores (nombre erróneo)
 │   ├── hooks/                  # Hooks personalizados
-│   │   ├── useWeatherApi.js    # Lógica para consumir la API del clima
+│   │   ├── weatherApiHook.js   # Hook para consumir la API del clima (nombre erróneo)
 │   ├── styles.css              # Estilos globales
-│   ├── App.jsx                 # Componente principal
+│   ├── application.jsx         # Componente principal (nombre erróneo)
 │   ├── main.jsx                # Punto de entrada de ReactDOM
 ├── .env                        # Variables de entorno para la API Key
 ├── package.json                # Configuración del proyecto y dependencias
@@ -60,22 +58,41 @@ WeatherApp/
 ├── README.md                   # Documentación del proyecto
 ```
 
-## **Cómo Ejecutar el Proyecto**
+## Errores y Tareas Pendientes
 
-### **Prerrequisitos**
+1. **Errores en el Código**:
+
+   - Importaciones incorrectas de componentes (`FormWeather`, `InfoWeather`, `Error`).
+   - Ruta mal escrita para el hook `useWeatherApi`.
+   - Variable de entorno `VITE_WEATHER_API_KEY` mal nombrada como `VITE_API_KEY`.
+   - Faltan validaciones en el input de búsqueda.
+
+2. **Tareas Pendientes**:
+
+   - Implementar un estado de carga (`loading`) para mostrar un spinner mientras se realiza una petición a la API.
+   - Manejar y diferenciar los errores según el código de respuesta HTTP (404, 500, etc.).
+   - Validar los datos recibidos de la API antes de renderizarlos.
+   - Mostrar un mensaje placeholder cuando no hay datos ni errores.
+
+3. **Optimización del Código**:
+   - Separar la lógica de validación y manejo de errores en funciones auxiliares.
+
+## Cómo Ejecutar el Proyecto
+
+### Prerrequisitos
 
 Antes de ejecutar el proyecto, asegúrate de tener instalado lo siguiente:
 
 - [Node.js](https://nodejs.org/) (v16 o superior).
 - [npm](https://www.npmjs.com/).
 
-### **Pasos para Configuración**
+### Pasos para Configuración
 
 1. **Clonar el repositorio**:
 
    ```bash
-   git clone https://github.com/tuusuario/WeatherApp.git
-   cd WeatherApp
+   git clone https://github.com/adalid-cl/ESPECIALIZACION_FRONTEND_M5_AE4.git
+   cd ESPECIALIZACION_FRONTEND_M5_AE4
    ```
 
 2. **Instalar las dependencias**:
@@ -98,59 +115,37 @@ Antes de ejecutar el proyecto, asegúrate de tener instalado lo siguiente:
    ```
    La aplicación estará disponible en `http://localhost:5173`.
 
-## **Cómo Funciona**
+## Retos para los Estudiantes
 
-### **Búsqueda de Clima**
+1. **Corregir Importaciones y Rutas**:
 
-- Escribe el nombre de una ciudad en el campo de búsqueda y presiona el botón "Search".
-- La app muestra:
-  - Temperatura actual, mínima y máxima.
-  - Descripción del clima y un ícono representativo.
-  - Humedad, velocidad del viento y dirección.
-  - Hora de amanecer y atardecer.
+   - Identificar y arreglar los nombres incorrectos de componentes y archivos.
 
-### **Gestión de Errores**
+2. **Validar Entradas**:
 
-- Si la ciudad no se encuentra, muestra un mensaje de error como "City not found".
-- Maneja problemas de red o claves de API inválidas.
+   - Implementar validaciones en el input para evitar búsquedas vacías o con caracteres no válidos.
 
-## **Datos Obtenidos de la API**
+3. **Manejo de Errores**:
 
-1. **Clima Básico**:
+   - Diferenciar entre errores de red, ciudad no encontrada, o API Key inválida.
 
-   - Descripción (despejado, nublado, etc.).
-   - Icono para representación gráfica.
+4. **Estado de Carga**:
 
-2. **Temperatura**:
+   - Agregar un spinner o mensaje de carga mientras se espera la respuesta de la API.
 
-   - Actual, mínima, máxima, y sensación térmica.
+5. **Validar Datos de la API**:
 
-3. **Ambiente**:
+   - Comprobar que los datos recibidos contienen los campos esperados antes de usarlos.
 
-   - Humedad (%).
-   - Presión atmosférica (hPa).
+6. **Diseño Mejorado**:
+   - Personalizar los estilos para que la app sea más atractiva.
 
-4. **Viento**:
+## Notas de Seguridad
 
-   - Velocidad y dirección.
+- Asegúrate de no exponer la clave de API en el código fuente. Utiliza variables de entorno para mantenerla segura.
+- Las validaciones deben realizarse tanto en el cliente como en el servidor en entornos reales.
 
-5. **Horario Solar**:
-   - Hora del amanecer y atardecer.
-
-## **Tecnologías Utilizadas**
-
-- **React**: Framework para construir interfaces de usuario.
-- **Vite**: Herramienta para desarrollo rápido.
-- **Bootstrap**: Framework CSS para diseño responsivo.
-- **Fetch API** y **Axios**: Para consumir APIs.
-- **Hooks de React**: `useState`, `useEffect` y hooks personalizados.
-
-## **Notas de Seguridad**
-
-- La clave de API se almacena en variables de entorno (`.env`) para evitar exponerla en el código fuente.
-- En entornos reales, las claves sensibles y validaciones deben manejarse del lado del servidor.
-
-## **Soporte**
+## Soporte
 
 Si tienes preguntas o encuentras algún problema, por favor abre un issue en este repositorio o contacta al autor.
 
