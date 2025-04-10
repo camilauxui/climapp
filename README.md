@@ -1,8 +1,6 @@
 <<<<<<< HEAD
 # WeatherApp
 
-![Adalid Logo](src/assets/logo.jpeg)
-
 **WeatherApp** es una aplicación React diseñada para consumir datos de una API de clima en tiempo real. Los estudiantes deberán identificar y corregir errores, implementar características pendientes y mejorar la funcionalidad para que la app sea completamente funcional.
 
 ## Objetivo
