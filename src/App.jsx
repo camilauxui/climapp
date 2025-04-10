@@ -1,40 +1,39 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import WeatherForm from './components/WeatherForm';
+import WeatherInfo from './components/WeatherInfo';
+import ErrorAlert from './components/ErrorAlert';
+import useWeatherApi from './hooks/useWeatherApi';
+import 'bootstrap/dist/css/bootstrap.css';
+import './styles.css';
 
-// ERROR: Nombres de componentes mal escritos.
-import WeatherForm from './components/FormWeather';
-import WeatherInfo from './components/InfoWeather';
-import ErrorAlert from './components/Error';
-
-// ERROR: Ruta incorrecta para el hook personalizado.
-import useWeatherApi from './hooks/weatherApiHook';
+const LoadingSpinner = () => (
+  <div className="spinner-border text-primary" role="status">
+    <span className="visually-hidden">Cargando...</span>
+  </div>
+);
 
 const App = () => {
   const [query, setQuery] = useState('');
-
-  // TODO: Agregar estado para manejar la carga (loading) y mostrar un spinner.
-  const { weatherData, error, fetchWeather } = useWeatherApi();
+  const { weatherData, error, fetchWeather, loading } = useWeatherApi();
 
   const handleSearch = () => {
-    // BUG: No se valida si el nombre de la ciudad tiene caracteres válidos (por ejemplo, no numéricos).
-    // TIP: Implementar validación para evitar nombres de ciudad inválidos.
     if (query.trim()) {
       fetchWeather(query);
     } else {
-      console.log('Please enter a valid city name.'); // ERROR: Mensaje no se muestra al usuario.
+      console.log('Please enter a valid city name.');
     }
   };
 
   return (
     <div className="container py-5">
-      <h1 className="text-center mb-4">Weather App</h1>
+      <h1 className="text-center mb-4"> 🔅 Info Clima 🌧️</h1>
 
-      {/* ERROR: El componente `WeatherForm` no se importa correctamente debido a un error en el nombre de la ruta. */}
       <WeatherForm query={query} setQuery={setQuery} onSearch={handleSearch} />
 
-      {/* TODO: Mejorar la presentación del error, como usar un botón de cierre. */}
+      {loading && <LoadingSpinner />}
+
       {error && <ErrorAlert message={error} />}
 
-      {/* ERROR: Si no hay datos y no hay error, el diseño no muestra ningún mensaje. */}
       {weatherData && <WeatherInfo data={weatherData} />}
     </div>
   );

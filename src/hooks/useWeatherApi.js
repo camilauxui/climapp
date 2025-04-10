@@ -1,40 +1,51 @@
 import { useState } from "react";
 
-// TODO: Implementar un estado de carga (loading) para indicar cuándo la API está siendo llamada.
-// TODO: Manejar casos donde la respuesta de la API no incluya datos esperados o válidos.
-
 const useWeatherApi = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // BUG: No se maneja un estado de carga para mostrar un spinner o mensaje al usuario.
+  // Función para obtener los datos del clima
   const fetchWeather = async (city) => {
-    // ERROR: Nombre de la variable de entorno incorrecto.
-    const API_KEY = import.meta.env.VITE_API_KEY; // El nombre correcto es `VITE_WEATHER_API_KEY`.
+    // Usar la variable de entorno para la clave de API
+    const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
     const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
 
     try {
-      setError(null);
-      setWeatherData(null);
+      setLoading(true); // Establecer estado de carga
+      setError(null); // Resetear el error
+      setWeatherData(null); // Resetear los datos del clima
 
-      // BUG: No se maneja el caso de tiempo de espera o conexión lenta.
-      const response = await fetch(API_URL);
+      const response = await fetch(API_URL); // Realizar la solicitud a la API
 
+      // Manejar diferentes códigos de estado HTTP
       if (!response.ok) {
-        throw new Error("City not found"); // ERROR: Mensaje de error genérico; debería ser más descriptivo.
+        if (response.status === 401) {
+          throw new Error("API Key inválida");
+        } else if (response.status === 404) {
+          throw new Error("Ciudad no encontrada");
+        } else {
+          throw new Error("Error de la API");
+        }
       }
 
-      const data = await response.json();
+      const data = await response.json(); // Convertir la respuesta a JSON
 
-      // BUG: No se valida si `data` contiene los campos esperados antes de usarlo.
-      setWeatherData(data);
+      // Validar que los datos de la API contengan los campos esperados
+      if (!data || !data.weather || !data.main) {
+        throw new Error("Datos de la API incompletos o inválidos");
+      }
+
+      setWeatherData(data); // Establecer los datos del clima
     } catch (err) {
-      // ERROR: No se diferencian los tipos de errores (red, clave de API inválida, etc.).
-      setError(err.message || "An unknown error occurred");
+      setError(err.message || "Ocurrió un error desconocido"); // Manejar errores
+    } finally {
+      setLoading(false); // Establecer estado de carga a falso
     }
   };
 
-  return { weatherData, error, fetchWeather };
+  // Devolver los estados y la función fetchWeather
+  return { weatherData, error, fetchWeather, loading };
 };
 
 export default useWeatherApi;

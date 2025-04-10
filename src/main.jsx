@@ -1,13 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './application';
-import 'bootstrap/dist/bootstrap.css';
-import './style.css';
+import { createRoot } from 'react-dom/client';
+import App from './App';
+import 'bootstrap/dist/css/bootstrap.css';
+import './styles.css';
 
-// TODO: Configurar el punto de entrada de la aplicación para manejar errores globales.
-// TODO: Agregar un mensaje o spinner de carga inicial antes de renderizar el componente `App`.
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>

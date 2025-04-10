@@ -1,11 +1,25 @@
-// TODO: Considerar mejorar la presentación del mensaje de error, podría incluir un botón para cerrar la alerta.
+import React, { useState } from 'react';
+
 const ErrorAlert = ({ message }) => {
-  // BUG: Este componente no verifica si el mensaje está vacío. Esto puede causar que se renderice un cuadro vacío.
-  // TIP: Agregar una validación para evitar renderizar si no hay mensaje.
+  const [isVisible, setIsVisible] = useState(true);
+
+  if (!message || typeof message !== 'string') {
+    return null; // No renderizar si el mensaje está vacío o no es una cadena.
+  }
+
+  if (!isVisible) {
+    return null; // No renderizar si la alerta ha sido cerrada.
+  }
+
   return (
-    <div className="alert alert-danger text-center">
-      {/* ERROR: Si `message` no es una cadena, esto podría causar un error. */}
+    <div className="alert alert-danger text-center alert-dismissible fade show" role="alert">
       {message}
+      <button
+        type="button"
+        className="btn-close"
+        aria-label="Close"
+        onClick={() => setIsVisible(false)}
+      ></button>
     </div>
   );
 };

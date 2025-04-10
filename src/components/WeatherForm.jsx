@@ -1,23 +1,35 @@
-// TODO: Agregar validación para evitar que se envíe el formulario con el campo vacío.
+import React from "react";
+
 const WeatherForm = ({ query, setQuery, onSearch }) => {
+  const handleSearch = () => {
+    const trimmedQuery = query.trim();
+    const isValidQuery = /^[a-zA-Z\s]+$/.test(trimmedQuery);
+
+    if (trimmedQuery === "") {
+      alert("Debe ingresar una ciudad");
+      return;
+    } else if (!isValidQuery) {
+      alert("Ingrese solo letras y espacios");
+      return;
+    }
+
+    onSearch();
+  };
+
   return (
     <div className="d-flex justify-content-center mb-4">
       <input
         type="text"
         className="form-control w-50"
-        placeholder="Enter city name"
+        placeholder="Escribe el nombre de una ciudad"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
       <button
         className="btn btn-primary ms-2"
-        onClick={() => {
-          // BUG: No se valida si el campo de texto está vacío antes de ejecutar la función.
-          // TIP: Agregar una validación para mostrar un mensaje si el usuario intenta buscar sin ingresar una ciudad.
-          onSearch();
-        }}
+        onClick={handleSearch}
       >
-        Search
+        Consulta su Clima
       </button>
     </div>
   );
