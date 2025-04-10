@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # WeatherApp
 
 ![Adalid Logo](src/assets/logo.jpeg)
@@ -154,3 +155,6 @@ Si tienes preguntas o encuentras algún problema, por favor abre un issue en est
 - [Brayan Diaz C](https://github.com/brayandiazc)
 
 Con ❤️ por [Adalid CL](https://github.com/adalid-cl) 😊
+=======
+# climapp
+>>>>>>> 830a329abeb880f7bd3b4845adc6846da4cbbaef
