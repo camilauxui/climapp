@@ -59,6 +59,3 @@ Antes de ejecutar el proyecto, asegúrate de tener instalado lo siguiente:
 - [npm](https://www.npmjs.com/).
 
 
-=======
-# climapp
->>>>>>> 830a329abeb880f7bd3b4845adc6846da4cbbaef
